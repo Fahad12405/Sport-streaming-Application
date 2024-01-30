@@ -5,14 +5,14 @@ const Login = (props) => {
     <Container>
       <Content>
         <CTA>
-          <CTALogoOne src="/images/cta-logo-one.svg" alt="" />
-          <SignUp>GET ALL THERE</SignUp>
+          <CTALogoOne src="/images/cta-logo-one.png" alt="" />
+          <SignUp>
+            GET ALL THERE</SignUp>
           <Description>
-            Get Premier Access to Raya and the Last Dragon for an additional fee
-            with a Disney+ subscription. As of 03/26/21, the price of Disney+
-            and The Disney Bundle will increase by $1.
+            Get Premier Access to Watch-Out for an additional fee
+            with a subscription. As of 03/26/24, the price of Bundle will increase by $1.
           </Description>
-          <CTALogoTwo src="/images/cta-logo-two.png" alt="" />
+          {/* <CTALogoTwo src="/images/cta-logo-two.png" alt="" /> */}
         </CTA>
         <BgImage />
       </Content>
@@ -47,7 +47,7 @@ const BgImage = styled.div`
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url("/images/login-background.jpg");
+  background-image: url("/images/login-background-2.jpg");
   position: absolute;
   top: 0;
   right: 0;

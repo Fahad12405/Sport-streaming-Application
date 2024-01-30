@@ -1,20 +1,15 @@
-Clone this project with this command ##git clone
+# Disney Plus Clone Readme
 
-## npm install
+## 
 
-use this command
-##git checkout -b main
 
-Making changes, Add changes
 
-## git add .
+## Description
+This is the ReactJS Disney Plus Clone, the perfect project to put on your portfolio by Clever Programmer.
 
-Now commit your code with a meaningfull message 
+## Build it today!
 
-##git commit -m "Description of changes"
-
-##git push origin "Add here branch name"
-
-##git checkout main
-
-Now you have successfully addded changes as a contributer.
+#### PREREQUISITES:
+- Sign up for a Firebase account <a href='https://firebase.google.com'>HERE</a>
+- Install Node JS in your computer <a href='https://nodejs.org/en/'>HERE</a>
+- Download all the images and videos <a href='https://drive.google.com/drive/folders/13SvUkXPh7ZC1FRtp62VKFi572elZyxi8?usp=sharing'>HERE</a>

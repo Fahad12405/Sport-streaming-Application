@@ -26,6 +26,7 @@ const Header = (props) => {
   const [isTrue, setState] = useState(false);
   const [value, setValue] = useState("");
   const [movies, setMatchingMovies] = useState();
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   const movies1 = useSelector(selectRecommend);
   const movies2 = useSelector(selectOriginal);
@@ -44,7 +45,7 @@ const Header = (props) => {
       movie.title.toLowerCase().includes(value.toLowerCase())
     );
     setMatchingMovies(movies);
-    console.log(movies)
+    console.log(movies);
   }, [value]);
 
   useEffect(() => {
@@ -93,40 +94,41 @@ const Header = (props) => {
         <Logo>
           <img src="/images/logo.png" alt="sport" />
         </Logo>
-
+        <HamburgerIcon onClick={() => setMenuOpen(!isMenuOpen)}>
+          <img src="/images/hamburger.svg" height="30px" />
+        <img src="/images/logo.png" alt="sport" height="50px"/>
+        </HamburgerIcon>
         {!userName ? (
           <>
             <Login onClick={handleAuth}>Getting start</Login>
           </>
         ) : (
           <>
-            <NavMenu>
-              <a href="/home">
+            <NavMenu isOpen={isMenuOpen}>
+              <Link to="/home">
                 <img src="/images/home-icon.svg" alt="HOME" />
                 <span>HOME</span>
-              </a>
-              <a>
-                <Link to="/live">
+              </Link>
+              <Link to="/live">
                 <img src="/images/watchlist-icon.svg" alt="WATCHLIST" />
                 <span>Live</span>
-                </Link>
-              </a>
-              <a>
+              </Link>
+              <Link>
                 <img src="/images/original-icon.svg" alt="ORIGINALS" />
                 <span>ORIGINALS</span>
-              </a>
-              <a>
+              </Link>
+              <Link>
                 <img src="/images/movie-icon.svg" alt="MOVIES" />
                 <span>MOVIES</span>
-              </a>
-              <a>
+              </Link>
+              <Link>
                 <img src="/images/series-icon.svg" alt="SERIES" />
                 <span>SERIES</span>
-              </a>
-              <a onClick={() => setState(!isTrue)}>
+              </Link>
+              <Link onClick={() => setState(!isTrue)}>
                 <img src="/images/search-icon.svg" alt="SEARCH" />
                 <span>SEARCH</span>
-              </a>
+              </Link>
             </NavMenu>
             <SignOut>
               <UserImg src={userPhoto} alt={userName} />
@@ -199,31 +201,31 @@ const Box = styled.div`
   height: 96vh;
   overflow: scroll;
   .scroll-content::-webkit-scrollbar {
-  width: 12px;
-}
+    width: 12px;
+  }
 
-.scroll-content::-webkit-scrollbar-thumb {
-  background-color: transparent;
-}
+  .scroll-content::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
 
-.scroll-content::-webkit-scrollbar-track {
-  background-color: transparent;
-}
+  .scroll-content::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 
-/* Style scrollbar for WebKit browsers */
-.scroll-content::-webkit-scrollbar-thumb {
-  background-color: #888; /* Change the color of the thumb */
-  border-radius: 6px; /* Add rounded corners to the thumb */
-}
+  /* Style scrollbar for WebKit browsers */
+  .scroll-content::-webkit-scrollbar-thumb {
+    background-color: #888; /* Change the color of the thumb */
+    border-radius: 6px; /* Add rounded corners to the thumb */
+  }
 
-.scroll-content::-webkit-scrollbar-track {
-  background-color: #eee; /* Change the color of the track */
-}
+  .scroll-content::-webkit-scrollbar-track {
+    background-color: #eee; /* Change the color of the track */
+  }
 
-/* Hover effect on the thumb */
-.scroll-content::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
-}
+  /* Hover effect on the thumb */
+  .scroll-content::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
 
   .cards {
     display: flex;
@@ -299,6 +301,7 @@ const Nav = styled.nav`
   height: 70px;
   background-color: #090b13;
   display: flex;
+
   justify-content: space-between;
   align-items: center;
   padding: 0 36px;
@@ -318,6 +321,10 @@ const Logo = styled.a`
   img {
     display: block;
     width: 100%;
+
+    @media (max-width: 546px) {
+      display: none;
+    }
   }
 `;
 
@@ -325,7 +332,7 @@ const NavMenu = styled.div`
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  height: 100%;
+  height: 60%;
   justify-content: flex-end;
   margin: 0px;
   padding: 0px;
@@ -333,11 +340,28 @@ const NavMenu = styled.div`
   margin-right: auto;
   margin-left: 25px;
 
+  @media (max-width: 546px) {
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    overflow-y: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+    display: ${(props) => (props.isOpen ? "flex" : "none")};
+  }
   a {
     cursor: pointer;
     display: flex;
     align-items: center;
     padding: 0 12px;
+    margin-top: 20px;
 
     img {
       height: 20px;
@@ -381,9 +405,19 @@ const NavMenu = styled.div`
       }
     }
   }
+`;
 
-  @media (max-width: 768px) {
-    display: none;
+const HamburgerIcon = styled.div`
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 280px;
+
+  @media (max-width: 546px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -402,7 +436,13 @@ const Login = styled.a`
     color: #000;
     border-color: transparent;
   }
+
+  @media (max-width: 546px) {
+    display: block;
+    /* width: 10px; */
+  }
 `;
+
 const Register = styled.div`
   height: 48px;
   letter-spacing: 2px;
